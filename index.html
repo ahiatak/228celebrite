@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Food Menu</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--link rel="stylesheet" href="lib/quill/quill.bubble.css"-->
+    <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="lib/bootstrap/bootstrap-grid.min.css"> -->
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            /*background-color: #663300;*/
+            background-color: #422618;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .icons img {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        main {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+            /*background-color: #FFCC00;*/
+            background-color: #fea500;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+        }
+
+        .item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        footer {
+            /*background-color: #FFCC00;*/
+            background-color: #fea500;
+            color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+    </style>
+
+    <style>
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            /*background-color: #f1f1f1;*/
+            padding: 20px;
+        }
+
+        .icons2 {
+            display: flex;
+            flex-direction: row;
+            /*align-items: center;*/
+            position: relative;
+        }
+
+        .icons2 p {
+            /*background: rgba(0, 0, 0, 0.7);*/ /* Fond pour rendre le texte lisible */
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 5px; /* Espace entre le texte et l'image */
+            /*text-align: center;*/
+            margin: 0;
+        }
+
+        .icons2 img {
+            width: 25px; /* Taille de l'icône */
+            height: auto;
+        }
+    </style>
+
+    <style>
+        .arc-text {
+            /*position: relative;*/
+            width: 300px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+        }
+        .arc-text span {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            transform-origin: center bottom;
+        }
+    </style>
+</head>
+<body style="width: 600px">
+    <div class="container" id="container" style="background-color: #422618; background-image: url('/img/bg-1-.png'); background-repeat: no-repeat; background-size: contain;">
+        <header>
+            <div class="logo">
+                <img src="/img/logo-3.webp" alt="Logo">
+            </div>
+            <div class="icons">
+                <img src="/img/coffee.png" style="" alt="Coffee Icon">
+                <img src="/img/fork-knife-2.webp" style="" alt="Fork and Knife Icon">
+                <img src="/img/cup.webp" style="" alt="Cup Icon">
+            </div>
+        </header>
+
+        <main>
+            <br>
+            <br>
+            <br>
+            <h1 class="arc-text" style="position: absolute;" contenteditable></h1>
+            <h1 style="font-size: 3.5em; color: #fea500; margin: 0" contenteditable>MENU DU JOUR</h1>
+            <h2 contenteditable>30% de reduction pour les 10 premieres commandes</h2>
+            <div class="menu-items">
+                <h1 style="text-align: center; font-size: 3em" contenteditable onclick="if(this.innerText == 'Plats du jour'){ this.innerText = ''}else if(this.innerText.trim() == ''){this.innerText = 'Plats du jour'}">Plats du jour</h1>
+            </div>
+            <!-- <div class="menu-items">
+                <div class="item">
+                    <img src="/img/burger.png" alt="Burger">
+                    <h3>Burger</h3>
+                    <p>Enter a brief description of this food here.</p>
+                    <span>$3 - $7</span>
+                </div>
+                
+            </div> -->
+        </main>
+
+        <footer>
+            <div class="contact icons2">
+                <img src="/img/phone.png" alt="Phone Icon">
+                <p>(+228) 90 23 82 97 <br>
+                 (+228) 98 21 61 33</p>
+            </div>
+            <div class="email icons2">
+                <img src="/img/delivery.png" alt="Globe Icon">
+                <p>Nous vous livrons en tout lieu</p>
+            </div>
+        </footer>
+    </div>
+
+    <button id="share" onclick="shareTab('#container')">Partager</button>
+
+    <script src="lib/html2canvas/html2canvas.min.js"></script>
+    <script src="lib/reimg/reimg.js"></script>
+
+    <script>
+        
+        const container = document.querySelector('.arc-text');
+        const text = "228 CELEBRITE";
+        const radius = 180; // Rayon du cercle
+        const angleStep = 100 / (text.length - 1); // Angle entre chaque lettre
+        //const angleStep = 180 / (text.length - 1); // Angle entre chaque lettre
+
+        text.split("").forEach((char, i) => {
+            let span = document.createElement("span");
+            span.innerText = char;
+            //let angle = -90 + i * angleStep; // Commence au sommet (-90°)
+            let angle = -50 + i * angleStep; // Commence au sommet (-90°)
+            span.style.transform = `rotate(${angle}deg) translateY(-${radius}px)`;
+            container.appendChild(span);
+        });
+    </script>
+
+
+    <script>
+
+        let today = new Date().toLocaleDateString('fr-fr', { weekday:"long", year:"numeric", month:"long", day:"numeric"}); 
+
+        function downloadTab(pageContentId) {
+            resize(pageContentId);
+
+            html2canvas(document.querySelector(pageContentId)).then(canvas => {
+                ReImg.fromCanvas(canvas).downloadPng();
+            });
+            
+            //document.querySelector(pageContentId).style.width = 'auto';
+        }
+
+        function shareTab(pageContentId) {
+            
+            //resize(pageContentId);
+
+            // if(tabId == 4){ 
+            //     (DaddyName != undefined)? DaddyName.style.fontSize = '9rem' : "";
+            // }
+
+            html2canvas(document.querySelector(pageContentId)).then(canvas => {
+                shareCanvasAsImage(canvas.toDataURL());
+            });
+
+            /*setTimeout(function(){
+                document.querySelector(pageContentId).style.width = 'auto';
+                document.querySelector(pageContentId + " .title-1").style.fontSize = '18px';
+                document.querySelector(pageContentId + " .title-2").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .title-3").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .title-4").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .title-5").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .content-1").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .content-2").style.fontSize = '14px';
+                document.querySelector(pageContentId + " .DaddyName").style.fontSize = '18px';
+            }, 5000);*/
+
+            
+        }
+
+        async function shareCanvasAsImage(dataUrl) {
+
+            const blob = await (await fetch(dataUrl)).blob();
+
+            const image = new File([blob], '228celebrite.png', { type: blob.type })
+
+            if (navigator.canShare && navigator.canShare({ files: [image] })) {
+                try {
+                await navigator.share({
+                    files: [image],         // Array of files to share
+                    title: '228 Celebrite'  // Share dialog title
+                })
+                } catch (error) {
+                console.log('Sharing failed!', error)
+                }
+            } else {
+                console.log('This device does not support sharing files.')
+            }
+        }
+
+        // resize
+        function resize(pageContentId){
+            document.querySelector(pageContentId).style.width = '1080px';
+            document.querySelector('body').style.fontWeight = '600';
+            document.querySelector('body').style.fontSize = '3rem';
+            document.querySelectorAll("p").forEach(function (element, index) {
+                element.style.fontWeight = "800";
+                element.style.lineHeight = 1.5;
+            });
+
+            /*let tabId = pageContentId.split('-')[2];
+
+            const title1 = document.querySelector(pageContentId + " .title-1");
+            const title2 = document.querySelector(pageContentId + " .title-2");
+            const title3 = document.querySelector(pageContentId + " .title-3");
+            const title4 = document.querySelector(pageContentId + " .title-4");
+            const title5 = document.querySelector(pageContentId + " .title-5");
+            const content1 = document.querySelector(pageContentId + " .content-1");
+            const content2 = document.querySelector(pageContentId + " .content-2");
+            const DaddyName = document.querySelector(pageContentId + " .DaddyName");
+            const date = document.querySelector(pageContentId + " .date");
+
+            (title1 != undefined)? title1.style.fontSize = '5rem' : "";
+            (title2 != undefined)? title2.style.fontSize = '4rem': "";
+            (title3 != undefined)? title3.style.fontSize = '3.5rem' : "";
+            (title4 != undefined)? title4.style.fontSize = '3.5rem' : "";
+            (title5 != undefined)? title5.style.fontSize = '3.5rem' : "";
+            (content1 != undefined)? content1.style.fontSize = '3.5rem' : "";
+            (content2 != undefined)? content2.style.fontSize = '3.5rem' : "";
+            (DaddyName != undefined)? DaddyName.style.fontSize = '6rem' : "";
+            (date != undefined)? date.style.fontSize = '3rem' : "";
+
+            document.querySelector(pageContentId + " .logo").style.width = '12rem';*/
+        }
+    </script>
+
+</body>
+</html>
