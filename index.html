@@ -189,7 +189,7 @@
     <script>
         
         const container = document.querySelector('.arc-text');
-        const text = "228 CELEBRITE";
+        const text = "228 PRIVILEGIE";
         const radius = 180; // Rayon du cercle
         const angleStep = 100 / (text.length - 1); // Angle entre chaque lettre
         //const angleStep = 180 / (text.length - 1); // Angle entre chaque lettre
@@ -250,13 +250,13 @@
 
             const blob = await (await fetch(dataUrl)).blob();
 
-            const image = new File([blob], '228celebrite.png', { type: blob.type })
+            const image = new File([blob], '228privilégié.png', { type: blob.type })
 
             if (navigator.canShare && navigator.canShare({ files: [image] })) {
                 try {
                 await navigator.share({
                     files: [image],         // Array of files to share
-                    title: '228 Celebrite'  // Share dialog title
+                    title: '228 Privilégié'  // Share dialog title
                 })
                 } catch (error) {
                 console.log('Sharing failed!', error)
